@@ -31,14 +31,17 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
-app.options('*', cors()); // ✅ Preflight
 
-// ✅ Routes
+
+console.log("Mounting routes...");
+
 const userRoutes = require('./routes/userRoutes');
 app.use('/user', userRoutes);
+console.log("User routes mounted.");
 
 const adminRoutes = require('./routes/adminRoutes');
 app.use('/admin', adminRoutes);
+console.log("Admin routes mounted.");
 
 // ✅ MongoDB connection
 mongoose.connect(process.env.MONGO_URL, {
