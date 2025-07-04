@@ -8,7 +8,13 @@ dotenv.config();
 const app=express();
 
 app.use(express.json());
-app.use(cors({ origin: process.env.FRONT_END_URL }));
+
+app.use(cors({
+  origin: process.env.FRONT_END_URL,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+app.options("*", cors()); 
 app.use(morgan("dev"));
 
 const userRoutes=require('./routes/userRoutes');
