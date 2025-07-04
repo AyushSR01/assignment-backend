@@ -13,10 +13,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // ✅ CORS setup
-const allowedOrigins = [
-  process.env.FRONT_END_URL, // should be set in .env
-  'http://localhost:5173'
-];
+
 
 app.use(cors({
   origin: process.env.FRONT_END_URL,
