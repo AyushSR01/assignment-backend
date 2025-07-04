@@ -9,9 +9,20 @@ const app=express();
 
 app.use(express.json());
 
+
+const allowedOrigins = [
+  process.env.FRONT_END_URL,
+  'http://localhost:5173' 
+];
+
 app.use(cors({
-  origin: process.env.FRONT_END_URL,
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.options("*", cors()); 
